@@ -1,0 +1,470 @@
+---
+title: Java
+description: A guide to Java development with Kiro's AI powered assistance
+---
+
+# Java Development with Kiro
+
+Kiro provides powerful AI-assisted development capabilities for Java projects, helping you write, debug, and maintain Java code more efficiently.
+
+## Prerequisites
+
+Before diving into Java development with Kiro, ensure you have:
+
+- **Java Development Kit (JDK)**: Install the [latest LTS version](https://adoptium.net/) (JDK 17 or newer recommended)
+- **Build Tool**: Maven or Gradle for dependency management and build automation
+- **IDE Integration**: Kiro works alongside your existing Java development environment
+- **Git**: For version control and collaboration
+
+## Setting Up Your Java Environment
+
+### JDK Installation and Configuration
+
+Kiro can help you set up and configure your Java development environment:
+
+```
+"Help me install the latest JDK for my operating system"
+"Configure JAVA_HOME environment variable on my system"
+"Set up multiple JDK versions and switch between them"
+```
+
+### Project Configuration
+
+Kiro can help you create and maintain configuration files for your Java projects:
+
+```
+"Create a new Maven project for a Spring Boot application"
+"Set up a Gradle build file for my Android app"
+"Add JUnit 5 dependencies to my Maven project"
+```
+
+### Project Structure
+
+Kiro can help organize your Java project following best practices:
+
+```
+"Set up a standard Maven directory structure for my project"
+"Create a multi-module Gradle project structure"
+"Organize my Spring Boot application using a layered architecture"
+```
+
+## Kiro Tools with Java
+
+### Code Analysis and Refactoring
+
+Kiro can analyze your Java code to identify issues and suggest improvements:
+
+- **Code Quality Analysis**: Ask Kiro to review your code for potential bugs, performance issues, or styling
+- **Refactoring Assistance**: Get help extracting methods, renaming variables, or restructuring code
+- **Design Pattern Implementation**: Kiro can help implement common design patterns in your Java code
+
+Example prompts:
+```
+"Analyze this method for potential bugs or performance issues"
+"Refactor this code to use the Builder pattern"
+"Convert this imperative code to use Java Streams"
+```
+
+### Debugging Assistance
+
+When you encounter errors in your Java code:
+
+- **Error Explanation**: Kiro can explain cryptic error messages in plain language
+- **Solution Suggestions**: Get actionable fixes for common errors
+- **Runtime Debugging**: Kiro can help set up debugging configurations
+
+Examples:
+```
+"Explain this NullPointerException in my code"
+"Help me debug this ConcurrentModificationException"
+"Analyze this stack trace and suggest a fix"
+```
+
+## Spec Driven Development
+
+Kiro's [spec-driven development](/docs/features/specs) transforms how you build Java features by formalizing the development process from requirements to implementation:
+
+1. **Create a Spec**: Define structured requirements with clear user stories and acceptance criteria
+2. **Refine with Kiro**: Collaborate on technical design with architecture diagrams and component relationships
+3. **Generate Implementation Plan**: Break down work into discrete, trackable tasks
+4. **Execute Tasks**: Implement each task with Kiro's assistance, tracking progress throughout
+
+### Spec Example: Building a RESTful API with Spring Boot
+
+Let's walk through an example of using specs to build a RESTful API with Spring Boot:
+
+#### 1. Creating the Spec
+
+Start by asking Kiro to create a spec for your API:
+
+```
+"Create a spec for a Spring Boot RESTful API that manages a product inventory"
+```
+
+#### 2. The Generated Spec Files
+
+Kiro will generate three key files:
+
+**requirements.md** :
+```markdown
+# Product Inventory API Requirements
+
+## User Stories
+
+- As an inventory manager, I want to add new products to the inventory
+- As a sales representative, I want to view available products
+- As an administrator, I want to update product details
+- As a system user, I want to remove discontinued products
+
+## Acceptance Criteria
+
+WHEN a user sends a POST request to /api/products
+THE SYSTEM SHALL create a new product and return a 201 Created response
+
+WHEN a user sends a GET request to /api/products
+THE SYSTEM SHALL return a list of all products with a 200 OK response
+
+WHEN a user sends a GET request to /api/products/{id}
+THE SYSTEM SHALL return the product details with a 200 OK response
+OR return a 404 Not Found if the product doesn't exist
+...
+```
+
+**design.md** :
+```markdown
+# Product Inventory API Design
+
+## Architecture
+
+- Spring Boot backend with RESTful endpoints
+- JPA/Hibernate for database access
+- H2 database for development, PostgreSQL for production
+- Spring Security for authentication and authorization
+
+## Component Structure
+
+```mermaid
+flowchart TD
+    Controller --> Service
+    Service --> Repository
+    Repository --> Database
+    Controller --> DTO
+    Service --> Entity
+    Entity --> DTO
+
+## Data Models
+
+```java
+public class Product {
+    private Long id;
+    private String name;
+    private String description;
+    private BigDecimal price;
+    private Integer stockQuantity;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    // Getters and setters
+}
+...
+```
+
+**tasks.md** :
+```markdown
+# Implementation Plan
+
+- [ ] 1. Project Setup and Core Infrastructure
+  - [ ] 1.1 Initialize Spring Boot project with necessary dependencies
+    - Create Spring Boot project with Spring Initializr
+    - Add dependencies: Spring Web, Spring Data JPA, H2, Lombok, Validation
+    - Configure application.properties for development environment
+    - _Requirements: 6.1, 6.2_
+
+  - [ ] 1.2 Set up project structure and package organization
+    - Create packages for controllers, services, repositories, entities, and DTOs
+    - Set up exception handling structure
+    - Configure database connection
+    - _Requirements: 6.1, 6.3_
+...
+```
+
+#### 3. Implementing Tasks
+
+After reviewing and approving the spec, you can ask Kiro to implement specific components:
+Refer to [working with specs](/docs/features/specs/index.mdx) on running tasks using the UI. 
+Alternatively, you can also ask Kiro to implement tasks:
+
+```markdown
+"Implement the Product entity and repository from my inventory API spec"
+```
+
+Kiro will generate the code for each component, following the architecture and design decisions documented in your spec.
+
+#### 4. Iterating and Refining
+
+As you test the implementation, you can refine components with Kiro:
+
+```
+"Add pagination to the product listing endpoint"
+"Implement filtering by product category"
+"Add validation for product price and stock quantity"
+```
+
+The spec remains your source of truth throughout development, ensuring consistency and tracking progress across the entire feature.
+
+## Steering
+
+[Steering](/docs/features/steering) allows you to provide Kiro with project specific context and guidelines. Kiro can generate steering files which you can refine:
+
+1. **Product brief** (`product.md`) - Contains information about the product, its purpose, and key features
+2. **Technical Stack** (`tech.md`) - Details the technologies, frameworks, and development guidelines
+3. **Project Structure** (`structure.md`) - Provides information about how the project is organized
+
+For Java projects, you can create additional custom steering files to provide more specific guidance:
+
+### Creating Custom Steering Files
+
+To add new steering documents to your project:
+
+1. Navigate to the Kiro panel in your IDE
+2. Locate the Steering section
+3. Click the `+` button to create a new steering file
+4. Name your file with a descriptive title
+5. Add your custom steering content following markdown conventions
+
+Custom steering files are stored in the `.kiro/steering/` directory and are automatically recognized by Kiro during interactions.
+
+### Code Style and Conventions
+
+For example, you can define custom naming conventions, file structure or practices for your Java project.
+Create a `java-conventions.md` steering file to define your team's coding standards:
+
+```markdown
+# Java Conventions
+
+## Naming Conventions
+- Use camelCase for variables and methods
+- Use PascalCase for classes and interfaces
+- Use UPPER_SNAKE_CASE for constants
+- Prefix interfaces with 'I' (e.g., IUserService)
+
+## Package Structure
+- Use reverse domain name notation (com.company.project)
+- Group related classes in packages
+- Follow the standard Maven/Gradle directory structure
+
+## Java Practices
+- Follow the SOLID principles
+- Use constructor injection for dependencies
+- Prefer immutable objects where appropriate
+- Use Optional for nullable return values
+```
+
+### Framework Specific Guidelines
+
+For Spring Boot projects, create a `spring-boot-patterns.md` steering file:
+
+```markdown
+# Spring Boot Development Guidelines
+
+## Component Structure
+- Use @RestController for REST endpoints
+- Use @Service for business logic
+- Use @Repository for data access
+- Use @Component for other beans
+
+## Dependency Injection
+- Prefer constructor injection over field injection
+- Use final fields for injected dependencies
+- Avoid circular dependencies
+
+## API Design
+- Follow REST principles for endpoint design
+- Use appropriate HTTP methods (GET, POST, PUT, DELETE)
+- Return appropriate HTTP status codes
+- Use DTOs for request/response objects
+```
+
+These steering files help Kiro generate code that follows your team's specific conventions and best practices.
+
+## Agent Hooks
+
+Kiro's [Agent Hooks](/docs/features/hooks) can automate common Java development tasks:
+
+1. Navigate to the **Agent Hooks** section in the Kiro panel
+2. Click the **+** button to create a new hook
+3. Define the hook workflow in natural language
+
+Here are some hook examples:
+
+#### Test Generation Hook
+
+Automatically generate tests when you save a Java file:
+
+```
+"Create a hook that generates JUnit tests when I save a new Java class"
+```
+
+#### Code Quality Hook
+
+Run code quality checks in the background:
+
+```
+"Set up a hook to run Checkstyle when I save Java files"
+```
+
+#### Dependency Update Hook
+
+Keep your dependencies up to date:
+
+```
+"Create a hook that checks for outdated Maven dependencies"
+```
+
+#### JavaDoc Generation Hook
+
+```
+When a Java file is saved:
+1. Check if JavaDoc comments are missing or incomplete
+2. Generate or update JavaDoc for public methods and classes
+3. Follow the project's documentation standards
+```
+
+#### Spring Boot Configuration Hook
+
+```
+When application.properties or application.yml is modified:
+1. Validate the configuration against Spring Boot documentation
+2. Check for deprecated properties
+3. Suggest security improvements for sensitive properties
+4. Ensure consistent formatting
+```
+
+## Documentation Access with `#docs`
+
+Kiro provides built-in access to documentation for Java and popular frameworks through the `#docs` reference system. This allows you to quickly bring relevant documentation into your conversations with Kiro.
+
+### Using Built-in Documentation References
+
+Simply type `#` in the chat and select from the available documentation sources, such as:
+
+- **#Java** - Java language documentation
+- **#Spring** - Spring Framework documentation
+- **#SpringBoot** - Spring Boot documentation
+- **#Hibernate** - Hibernate ORM documentation
+- **#JUnit** - JUnit testing framework documentation
+- **#Maven** - Maven build tool documentation
+- **#Gradle** - Gradle build tool documentation
+
+Example usage:
+```
+"#Java How do I use CompletableFuture?"
+"#SpringBoot What's the best way to handle exceptions in a REST controller?"
+```
+
+You can also reference specific documentation URLs using `#URL`:
+```
+"#URL https://docs.spring.io/spring-framework/docs/current/reference/html/core.html"
+```
+
+## MCP Servers
+
+Kiro's support for Model Context Protocol (MCP) servers enhance your Java development experience by providing specialized tools and capabilities. For a complete guide on setting up and using MCP, see the [MCP documentation](/docs/features/mcp).
+
+#### Checkstyle MCP Server
+
+The Checkstyle MCP server allows you to check your Java code style directly within Kiro:
+
+```json
+{
+  "mcpServers": {
+    "checkstyle": {
+      "type": "stdio",
+      "command": "java",
+      "args": ["-jar", "checkstyle-mcp.jar"]
+    }
+  }
+}
+```
+
+With this server configured, you can:
+
+- Check Java code style with Kiro
+- Get AI powered explanations and fixes for style violations
+- Apply best practices automatically to your codebase
+
+Example usage:
+```
+"Check my Java class for style violations"
+"Fix Checkstyle issues in my project"
+```
+
+#### Additional Useful MCP Servers
+
+Explore more MCP servers in the [AWS MCP Servers](https://awslabs.github.io/mcp/) and [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers) collection.
+
+## Debugging Issues
+
+When you encounter issues, Kiro can help diagnose and fix them:
+
+1. **Inline Chat**:
+   - Type `cmd` or `ctrl` + `I` to open the inline chat.
+   - Ask Kiro to help debug your code with natural language.
+2. **Add to Chat**:
+   - Type `cmd` or `ctrl` + `L` to add the current file to the chat.
+   - Ask Kiro to help debug your code with natural language.
+3. **Quick Fix**:
+   - Hover on a error or warning, then select `Quick fix` and `Ask Kiro`.
+   - Kiro will automatically add the code to the chat and start debugging.
+
+## Common Java Development Tasks with Kiro
+
+### Creating a New Spring Boot Application
+
+Ask Kiro to help you set up a new Spring Boot application:
+
+```
+"Create a new Spring Boot application with REST API support"
+```
+
+Kiro will guide you through the process, including:
+- Setting up the project structure
+- Configuring dependencies
+- Creating initial controllers and services
+
+### Implementing Design Patterns
+
+Ask Kiro to help you implement common design patterns:
+
+```
+"Implement the Repository pattern for my User entity"
+"Show me how to use the Factory pattern for creating different payment processors"
+"Refactor this code to use the Observer pattern"
+```
+
+### Working with Databases
+
+Get help with database operations:
+
+```
+"Create JPA entities for a blog application with posts and comments"
+"Write a JPQL query to find all orders placed in the last 30 days"
+"Help me optimize this SQL query for better performance"
+```
+
+### Testing Java Code
+
+Kiro can help you write tests for your Java code:
+
+```
+"Write JUnit tests for this UserService class"
+"Create a Mockito test for this REST controller"
+"Help me set up integration tests for my Spring Boot application"
+```
+
+## Resources
+
+- [Java Documentation](https://docs.oracle.com/en/java/)
+- [Spring Framework Documentation](https://docs.spring.io/spring-framework/reference/)
+- [Spring Boot Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/)
+- [Maven Documentation](https://maven.apache.org/guides/)
+- [Gradle Documentation](https://docs.gradle.org/current/userguide/userguide.html)
