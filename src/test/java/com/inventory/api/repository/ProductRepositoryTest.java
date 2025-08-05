@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.math.BigDecimal;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -64,38 +66,41 @@ public class ProductRepositoryTest {
 
     @Test
     void findByNameContainingIgnoreCase_Success() {
-        List<Product> products = productRepository.findByNameContainingIgnoreCase("phone");
+        Page<Product> products = productRepository.findByNameContainingIgnoreCase("phone",
+                PageRequest.of(0, 10));
 
         assertNotNull(products);
-        assertEquals(1, products.size());
-        assertEquals("Smartphone", products.get(0).getName());
+        assertEquals(1, products.getTotalElements());
+        assertEquals("Smartphone", products.getContent().get(0).getName());
     }
 
     @Test
     void findByCategoryId_Success() {
-        List<Product> products = productRepository.findByCategoryId(category.getId());
+        Page<Product> products = productRepository.findByCategoryId(category.getId(),
+                PageRequest.of(0, 10));
 
         assertNotNull(products);
-        assertEquals(2, products.size());
+        assertEquals(2, products.getTotalElements());
     }
 
     @Test
     void findByPriceBetween_Success() {
-        List<Product> products = productRepository.findByPriceBetween(
-                new BigDecimal("900.00"), new BigDecimal("1000.00"));
+        Page<Product> products = productRepository.findByPriceBetween(
+                new BigDecimal("900.00"), new BigDecimal("1000.00"), PageRequest.of(0, 10));
 
         assertNotNull(products);
-        assertEquals(1, products.size());
-        assertEquals("Smartphone", products.get(0).getName());
+        assertEquals(1, products.getTotalElements());
+        assertEquals("Smartphone", products.getContent().get(0).getName());
     }
 
     @Test
     void findByInventoryQuantityGreaterThan_Success() {
-        List<Product> products = productRepository.findByInventoryQuantityGreaterThan(30);
+        Page<Product> products = productRepository.findByInventoryQuantityGreaterThan(30,
+                PageRequest.of(0, 10));
 
         assertNotNull(products);
-        assertEquals(1, products.size());
-        assertEquals("Smartphone", products.get(0).getName());
+        assertEquals(1, products.getTotalElements());
+        assertEquals("Smartphone", products.getContent().get(0).getName());
     }
 
     @Test

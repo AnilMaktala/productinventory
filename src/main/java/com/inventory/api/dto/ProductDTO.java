@@ -36,6 +36,10 @@ public class ProductDTO {
 
     private String categoryName;
 
+    private Long supplierId;
+
+    private String supplierName;
+
     private boolean lowStock;
 
     @Min(value = 1, message = "Low stock threshold must be at least 1")

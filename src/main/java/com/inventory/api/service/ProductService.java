@@ -40,4 +40,8 @@ public interface ProductService {
     List<ProductDTO> getLowStockProducts();
 
     ProductDTO assignCategory(Long productId, Long categoryId);
+
+    ProductDTO assignSupplier(Long productId, Long supplierId);
+
+    Page<ProductDTO> getProductsBySupplier(Long supplierId, Pageable pageable);
 }

@@ -45,4 +45,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                         Pageable pageable);
 
         List<Product> findByLowStockIsTrue();
+
+        Page<Product> findBySupplierId(Long supplierId, Pageable pageable);
+
+        long countBySupplierId(Long supplierId);
 }

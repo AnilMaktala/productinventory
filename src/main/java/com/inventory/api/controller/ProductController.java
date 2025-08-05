@@ -11,7 +11,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -178,4 +180,38 @@ public class ProductController {
                 List<ProductDTO> products = productService.getLowStockProducts();
                 return ResponseEntity.ok(products);
         }
+
+        @PutMapping("/{id}/supplier")
+        @Operation(summary = "Assign supplier to product", description = "Assigns a supplier to a product")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Supplier assigned successfully"),
+                        @ApiResponse(responseCode = "404", description = "Product or supplier not found")
+        })
+        public ResponseEntity<ProductDTO> assignSupplier(
+                        @Parameter(description = "Product ID") @PathVariable Long id,
+                        @Parameter(description = "Supplier ID") @RequestParam Long supplierId) {
+                ProductDTO product = productService.assignSupplier(id, supplierId);
+                return ResponseEntity.ok(product);
+        }
+
+        @GetMapping("/supplier/{supplierId}")
+        @Operation(summary = "Get products by supplier", description = "Retrieves all products from a specific supplier")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Products retrieved successfully")
+        })
+        public ResponseEntity<Page<ProductDTO>> getProductsBySupplier(
+                        @Parameter(description = "Supplier ID") @PathVariable Long supplierId,
+                        @Parameter(description = "Page number (0-based)") @RequestParam(defaultValue = "0") int page,
+                        @Parameter(description = "Page size") @RequestParam(defaultValue = "20") int size,
+                        @Parameter(description = "Sort field") @RequestParam(defaultValue = "name") String sortBy,
+                        @Parameter(description = "Sort direction") @RequestParam(defaultValue = "asc") String sortDir) {
+
+                Sort sort = sortDir.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending()
+                                : Sort.by(sortBy).ascending();
+                Pageable pageable = PageRequest.of(page, size, sort);
+
+                Page<ProductDTO> products = productService.getProductsBySupplier(supplierId, pageable);
+                return ResponseEntity.ok(products);
+        }
+
 }

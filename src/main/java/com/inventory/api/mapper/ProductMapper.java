@@ -21,6 +21,8 @@ public class ProductMapper {
                 .sku(product.getSku())
                 .categoryId(product.getCategory() != null ? product.getCategory().getId() : null)
                 .categoryName(product.getCategory() != null ? product.getCategory().getName() : null)
+                .supplierId(product.getSupplier() != null ? product.getSupplier().getId() : null)
+                .supplierName(product.getSupplier() != null ? product.getSupplier().getName() : null)
                 .lowStock(product.isLowStock())
                 .lowStockThreshold(product.getLowStockThreshold())
                 .build();

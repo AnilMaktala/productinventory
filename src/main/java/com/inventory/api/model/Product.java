@@ -42,6 +42,10 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
+
     private boolean lowStock;
 
     @Min(value = 1, message = "Low stock threshold must be at least 1")

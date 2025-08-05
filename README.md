@@ -13,16 +13,18 @@ A Spring Boot RESTful API for managing product inventory. This API provides endp
 - [API Endpoints](#api-endpoints)
   - [Product Endpoints](#product-endpoints)
   - [Category Endpoints](#category-endpoints)
+  - [Supplier Endpoints](#supplier-endpoints)
 - [Example API Calls](#example-api-calls)
 - [Error Handling](#error-handling)
 
 ## Features
 
-- CRUD operations for products and categories
+- CRUD operations for products, categories, and suppliers
 - Inventory management (update, increase, decrease)
 - Low stock threshold monitoring
-- Product categorization
+- Product categorization and supplier management
 - Advanced search and filtering
+- Supplier activation/deactivation
 - Comprehensive error handling
 - API documentation with Swagger/OpenAPI
 
@@ -103,6 +105,25 @@ This provides an interactive interface to explore and test all available endpoin
 | DELETE | /api/categories/{id}          | Delete a category (if no associated products) |
 | GET    | /api/categories/{id}/products | Get all products in a category                |
 
+### Supplier Endpoints
+
+| Method | URL                                 | Description                                   |
+| ------ | ----------------------------------- | --------------------------------------------- |
+| POST   | /api/suppliers                      | Create a new supplier                         |
+| GET    | /api/suppliers                      | Get all suppliers (paginated)                 |
+| GET    | /api/suppliers/{id}                 | Get a supplier by ID                          |
+| PUT    | /api/suppliers/{id}                 | Update a supplier                             |
+| DELETE | /api/suppliers/{id}                 | Delete a supplier (if no associated products) |
+| GET    | /api/suppliers/search               | Search suppliers with various criteria        |
+| GET    | /api/suppliers/active               | Get all active suppliers                      |
+| GET    | /api/suppliers/dropdown             | Get active suppliers for dropdown lists       |
+| PUT    | /api/suppliers/{id}/activate        | Activate a supplier                           |
+| PUT    | /api/suppliers/{id}/deactivate      | Deactivate a supplier                         |
+| GET    | /api/suppliers/{id}/with-products   | Get supplier with product count               |
+| GET    | /api/suppliers/exists               | Check if supplier exists by name              |
+| PUT    | /api/products/{id}/supplier         | Assign supplier to a product                  |
+| GET    | /api/products/supplier/{supplierId} | Get all products from a specific supplier     |
+
 ## Example API Calls
 
 ### Create a Product
@@ -142,10 +163,41 @@ curl -X PUT http://localhost:8080/api/products/1/inventory \
   }'
 ```
 
+### Create a Supplier
+
+```bash
+curl -X POST http://localhost:8080/api/suppliers \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "TechCorp Solutions",
+    "contactPerson": "Alice Johnson",
+    "email": "alice@techcorp.com",
+    "phone": "+1-555-0101",
+    "address": "123 Tech Street",
+    "city": "San Francisco",
+    "country": "USA",
+    "postalCode": "94105",
+    "notes": "Leading technology supplier",
+    "active": true
+  }'
+```
+
+### Assign Supplier to Product
+
+```bash
+curl -X PUT "http://localhost:8080/api/products/1/supplier?supplierId=1"
+```
+
 ### Search Products
 
 ```bash
 curl -X GET "http://localhost:8080/api/products/search?name=phone&minPrice=500&maxPrice=1500&inStock=true"
+```
+
+### Search Suppliers
+
+```bash
+curl -X GET "http://localhost:8080/api/suppliers/search?name=tech&city=San Francisco&active=true"
 ```
 
 ## Error Handling
