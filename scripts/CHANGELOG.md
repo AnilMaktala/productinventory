@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-01-20
+
+### Changed
+
+#### Issue Triage - Automatic Label Cleanup for Duplicates
+
+When an issue is identified as a duplicate, the triage workflow now automatically removes:
+- `pending-triage` label (duplicates don't need triage)
+- `bug` label (duplicate might reference a different issue type)
+
+**Rationale**: Keeps labels clean and accurate, reduces manual cleanup.
+
+**Example**:
+- Before: Issue has `bug`, `pending-triage`, `duplicate` labels
+- After: Issue has only `duplicate` label
+
+**Files Modified**:
+- `src/triage_issue.ts` - Added label removal logic
+
+**Impact**: Low risk, improves label accuracy, no breaking changes.
+
 ## [1.0.0] - 2024-01-20
 
 ### Added

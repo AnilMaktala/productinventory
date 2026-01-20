@@ -55,6 +55,11 @@ ${analysis.duplicates[0].reasoning}`;
 
       await github.addComment(issueNumber, comment);
       await github.addLabels(issueNumber, ['duplicate']);
+      
+      // Remove pending-triage and bug labels when marked as duplicate
+      console.log('Removing pending-triage and bug labels from duplicate issue...');
+      await github.removeLabel(issueNumber, 'pending-triage');
+      await github.removeLabel(issueNumber, 'bug');
     }
 
     console.log('✅ Triage completed successfully');
