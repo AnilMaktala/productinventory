@@ -1,0 +1,47 @@
+[
+  {
+    "number": 1,
+    "title": "Bug: Application crashes on startup",
+    "body": "When I start the application, it immediately crashes with error code 500. This happens every time I try to launch it.",
+    "state": "open",
+    "labels": [],
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "number": 2,
+    "title": "Feature Request: Add dark mode",
+    "body": "It would be great to have a dark mode option for the application. Many users prefer dark themes.",
+    "state": "open",
+    "labels": [],
+    "created_at": "2024-01-02T00:00:00Z",
+    "updated_at": "2024-01-02T00:00:00Z"
+  },
+  {
+    "number": 3,
+    "title": "Documentation: API endpoints not documented",
+    "body": "The API documentation is missing information about the authentication endpoints. Please add documentation for /api/auth/*",
+    "state": "open",
+    "labels": [],
+    "created_at": "2024-01-03T00:00:00Z",
+    "updated_at": "2024-01-03T00:00:00Z"
+  },
+  {
+    "number": 4,
+    "title": "Question: How to configure database connection?",
+    "body": "I'm trying to set up the application but I'm not sure how to configure the database connection. Can someone help?",
+    "state": "open",
+    "labels": [],
+    "created_at": "2024-01-04T00:00:00Z",
+    "updated_at": "2024-01-04T00:00:00Z"
+  },
+  {
+    "number": 5,
+    "title": "Bug: App crashes when clicking submit button",
+    "body": "Similar to issue #1, the application crashes but this time when I click the submit button on the form.",
+    "state": "open",
+    "labels": [],
+    "created_at": "2024-01-05T00:00:00Z",
+    "updated_at": "2024-01-05T00:00:00Z"
+  }
+]

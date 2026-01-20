@@ -1,0 +1,27 @@
+# Code Owners
+# These owners will be the default owners for everything in the repo.
+# Unless a later match takes precedence, they will be requested for
+# review when someone opens a pull request.
+
+# Global owners
+* @repository-owner
+
+# GitHub Actions workflows
+/.github/workflows/ @repository-owner @devops-team
+
+# Automation scripts
+/scripts/ @repository-owner @automation-team
+
+# Java application
+/src/ @repository-owner @backend-team
+
+# Documentation
+*.md @repository-owner @docs-team
+
+# Configuration files
+*.yml @repository-owner @devops-team
+*.json @repository-owner
+
+# Security-sensitive files
+/scripts/SECURITY.md @repository-owner @security-team
+/.github/workflows/*.yml @repository-owner @security-team

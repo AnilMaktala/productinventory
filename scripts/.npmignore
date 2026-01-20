@@ -1,0 +1,35 @@
+# Source files
+src/
+
+# Tests
+**/__tests__/
+**/*.test.ts
+**/*.spec.ts
+coverage/
+
+# Configuration
+.env
+.env.*
+!.env.example
+
+# Documentation
+*.md
+!README.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.log
+npm-debug.log*
+
+# Git
+.git/
+.gitignore
